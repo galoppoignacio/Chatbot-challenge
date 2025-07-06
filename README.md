@@ -17,7 +17,7 @@ Aplicación web de chat en tiempo real con autenticación, almacenamiento en Fir
 ## Demo
 
 ➡️ **[Deploy en Vercel](https://tuchat.vercel.app/)**  
-🗂️ **[Repo en GitHub](https://github.com/galoppoignacio/Chatbot-challenge)**
+🗂️ **[Repo en GitHub](https://github.com/usuario/fidooo-chat)**
 
 ---
 
