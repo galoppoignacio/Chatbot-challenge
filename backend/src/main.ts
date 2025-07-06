@@ -8,7 +8,7 @@ async function bootstrap() {
   
 
   const app = await NestFactory.create(AppModule);
-  app.enableCors({ origin: 'http://localhost:3000' }); //TODO Agregar vercel para cuando se despliegue
+  app.enableCors({ origin: ['http://localhost:3000', 'https://chatbot-challenge-ten.vercel.app/'] }); 
   await app.listen(3001);
   console.log('Backend escuchando en http://localhost:3001');
 }
