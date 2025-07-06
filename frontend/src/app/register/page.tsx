@@ -16,7 +16,8 @@ export default function RegisterPage() {
     try {
       await createUserWithEmailAndPassword(auth, email, password);
       router.push("/chat");
-    } catch (error: any) {
+    } catch (e) {
+      const error = e as { code?: string; message?: string };
       alert(error.message);
     }
   };

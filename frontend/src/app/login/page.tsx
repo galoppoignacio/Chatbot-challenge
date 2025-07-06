@@ -34,12 +34,13 @@ export default function LoginPage() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       router.push("/chat");
-    } catch (e: any) {
-      if (e.code === "auth/wrong-password")
+    } catch (e) {
+      const error = e as { code?: string; message?: string };
+      if (error.code === "auth/wrong-password")
         setErrorMsg("Contraseña incorrecta");
-      else if (e.code === "auth/user-not-found")
+      else if (error.code === "auth/user-not-found")
         setErrorMsg("No se encontró el usuario");
-      else setErrorMsg(e.message);
+      else setErrorMsg(error.message || "Error desconocido");
     } finally {
       setLoading(false);
     }

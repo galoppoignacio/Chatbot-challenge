@@ -1,18 +1,27 @@
 // src/app/chat/page.tsx
 "use client";
 import { useEffect, useState, useRef } from "react";
-import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, where } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, orderBy, serverTimestamp, where, Timestamp } from "firebase/firestore";
 import { db, auth } from "@/lib/firebase";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "next/navigation";
 import MessageBubble from "@/components/messageBubble";
+
+type Message = {
+  id: string;
+  text: string;
+  chatId: string;
+  user: { uid: string; email: string };
+  timestamp: Timestamp;
+};
+
 
 export default function ChatPage() {
   const { user, logOut } = useAuthStore();
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null);
   const [theme, setTheme] = useState<"light" | "dark">("light");
 
@@ -30,7 +39,7 @@ export default function ChatPage() {
     );
 
     const unsub = onSnapshot(q, (snap) => {
-      setMessages(snap.docs.map(d => ({ id: d.id, ...d.data() })));
+      setMessages(snap.docs.map((d) => ({ id: d.id, ...(d.data() as Omit<Message, "id">) })));
       bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     });
     return () => unsub();
@@ -47,13 +56,6 @@ export default function ChatPage() {
     document.body.classList.toggle("dark-mode", t === "dark");
   }, []);
 
-  const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : "light";
-    setTheme(next);
-    document.body.classList.toggle("dark-mode", next === "dark");
-    localStorage.setItem("theme", next);
-  };
-
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!message.trim() || !user) return;
@@ -68,7 +70,7 @@ export default function ChatPage() {
     });
 
     const token = await auth.currentUser?.getIdToken();
-    const res = await fetch("http://localhost:3001/chat", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

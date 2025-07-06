@@ -12,9 +12,10 @@ export default function ResetPasswordPage() {
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage("Te enviamos un correo para restablecer tu contraseña.");
-    } catch (error: any) {
+    } catch (e) {
+      const error = e as { message?: string };
       console.error("Error al enviar mail:", error.message);
-      setMessage("No pudimos enviar el correo. Revisá tu email.");
+      setMessage("No pudimos enviar el correo.");
     }
   };
 
