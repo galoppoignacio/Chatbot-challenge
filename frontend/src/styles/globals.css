@@ -1,0 +1,232 @@
+/* src/styles/globals.css */
+
+/* Tailwind no: CSS plano con variables para light/dark */
+:root {
+  --bg: #f8fafc;
+  --text: #22223b;
+  --header-bg: #ffffff;
+  --footer-bg: #ffffff;
+  --user-bg: #4f46e5;
+  --user-text: #ffffff;
+  --bot-bg: #e0e7ff;
+  --bot-text: #22223b;
+}
+
+html.dark {
+  --bg: #1f2937;
+  --text: #e5e7eb;
+  --header-bg: #111827;
+  --footer-bg: #111827;
+  --user-bg: #6366f1;
+  --user-text: #ffffff;
+  --bot-bg: #334155;
+  --bot-text: #f8fafc;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+}
+
+/* layout del chat */
+
+.chat-page {
+  position: relative;
+  height: 100%;
+}
+
+.chat-form {
+  display: flex;
+  justify-content: center;    /* centra todo el formulario */
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;           /* ancho máximo deseado */
+  margin: 0 auto;             /* centra el form en pantalla */
+  gap: 0.5rem;
+}
+
+.chat-input {
+  flex: 1;
+  min-width: 0;                 /* para que no crezca más que el padre */
+  height: 3rem;                 /* fijamos altura mayor */
+  padding: 0 1.5rem;            /* espacio interno horizontal */
+  font-size: 1rem;              /* texto legible */
+  border: 1px solid #c7d2fe;
+  border-radius: 9999px;
+}
+
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 56px;
+  background: var(--header-bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  z-index: 100;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 64px;
+  background: var(--footer-bg);
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  border-top: 1px solid rgba(0,0,0,0.1);
+  z-index: 100;
+}
+
+.main-content {
+  position: absolute;
+  top: 56px;      /* justo debajo del header */
+  bottom: 64px;   /* justo encima del footer */
+  left: 0; right: 0;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* burbujas: como antes */
+.message-bubble {
+  max-width: 75%;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 12px;
+  word-wrap: break-word;
+}
+.message-bubble.user {
+  align-self: flex-end;
+  background: var(--user-bg);
+  color: var(--user-text);
+  border-top-right-radius: 0;
+}
+.message-bubble.bot {
+  align-self: flex-start;
+  background: var(--bot-bg);
+  color: var(--bot-text);
+  border-top-left-radius: 0;
+}
+
+.send-button {
+  background: #4f46e5;
+  color: #ffffff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.send-button:hover {
+  background: #4338ca;
+}
+
+.card {
+  background: var(--header-bg);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Form inputs */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--user-bg);
+  box-shadow: 0 0 0 2px rgba(79,70,229,0.3);
+}
+
+/* Botones */
+.button {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--user-bg);
+  color: var(--user-text);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.button:hover {
+  background: #4338ca;
+}
+
+/* Links */
+.link {
+  color: var(--user-bg);
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.link:hover {
+  opacity: 0.8;
+}
+
+/* Utilitarias */
+.text-center { text-align: center; }
+.mb-4       { margin-bottom: 1rem; }
+.mt-2       { margin-top: 0.5rem; }
+
+/* Centrado vertical/horizontal */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.toggle-button {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 200;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.header .toggle-button {
+  position: static !important;   /* ya no fijo */
+  margin: 0;                     /* quita top/right */
+  padding: 0.5rem;               /* consistente con los otros botones */
+  font-size: 1.25rem;
+  color: var(--text);
+}
