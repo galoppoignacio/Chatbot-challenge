@@ -16,7 +16,7 @@ Aplicación web de chat en tiempo real con autenticación, almacenamiento en Fir
 
 ## Demo
 
-➡️ **[Deploy en Vercel](https://tuchat.vercel.app/)**  
+➡️ **[Deploy en Vercel](https://chatbot-challenge-ten.vercel.app/)**  
 🗂️ **[Repo en GitHub](https://github.com/galoppoignacio/Chatbot-challenge)**
 
 ---
@@ -28,6 +28,7 @@ Aplicación web de chat en tiempo real con autenticación, almacenamiento en Fir
 - Firebase Auth
 - Zustand
 - CSS Variables
+- Vercel deploy
 
 ### Backend
 - NestJS
@@ -35,6 +36,7 @@ Aplicación web de chat en tiempo real con autenticación, almacenamiento en Fir
 - CORS
 - Controllers
 - Firebase Firestore
+- Railway deploy
 
 ### IA & Cloud
 - Gemini
