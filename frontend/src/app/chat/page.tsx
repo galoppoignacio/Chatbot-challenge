@@ -23,12 +23,11 @@ export default function ChatPage() {
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const bottomRef = useRef<HTMLDivElement | null>(null);
-  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     if (!user) router.replace("/login");
     else setCheckingAuth(false);
-  }, [user]);
+  }, [user, router]);
 
   useEffect(() => {
     if (!user) return;
@@ -48,13 +47,6 @@ export default function ChatPage() {
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme") as "light" | "dark" | null;
-    const t = saved || "light";
-    setTheme(t);
-    document.body.classList.toggle("dark-mode", t === "dark");
-  }, []);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
