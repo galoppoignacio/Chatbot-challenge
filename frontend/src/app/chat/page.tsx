@@ -62,7 +62,7 @@ export default function ChatPage() {
     });
 
     const token = await auth.currentUser?.getIdToken();
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/chat`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL!.replace(/\/$/, "")}/chat`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
