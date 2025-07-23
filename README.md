@@ -27,19 +27,16 @@ Aplicación web de chat en tiempo real con autenticación, almacenamiento en Fir
 - Next.js
 - Firebase Auth
 - Zustand
-- CSS Variables
 - Vercel deploy
 
 ### Backend
 - NestJS
 - JWT Validation
 - CORS
-- Controllers
 - Firebase Firestore
 - Railway deploy
 
 ### IA & Cloud
 - Gemini
 - Firebase Firestore
-- dotenv, axios
 
